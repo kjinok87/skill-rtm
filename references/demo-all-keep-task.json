@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "task_id": "demo:all-keep",
+  "revision": "r1",
+  "baseline_status": "APPROVED",
+  "requirements": [
+    {
+      "requirement_id": "REQ-ALREADY-COVERED",
+      "statement": "현재 산출물의 제목이 확인된다",
+      "acceptance": "실대상에서 검증된 제목 locator가 있다",
+      "source_locator": "brief.md#already-covered",
+      "current_evidence_ids": ["E-ALREADY-COVERED"]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "E-ALREADY-COVERED",
+      "locator": "actual-output.md#title",
+      "evidence_kind": "TARGET",
+      "verification_status": "VERIFIED"
+    }
+  ],
+  "candidate_mappings": [
+    {
+      "requirement_id": "REQ-ALREADY-COVERED",
+      "skill_version_id": "demo:source-check@1.0.0",
+      "proof_status": "TESTED",
+      "locator": "tests/source-check.json#REQ-ALREADY-COVERED"
+    }
+  ]
+}

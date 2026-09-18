@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "catalog_id": "demo:skill-rtm-catalog",
+  "catalog_revision": "r1",
+  "catalog_source": "https://example.invalid/catalog/skill-rtm-demo/r1",
+  "skills": [
+    {"skill_version_id": "demo:source-check@1.0.0", "content_sha256": "1111111111111111111111111111111111111111111111111111111111111111", "rights_status": "CLEARED", "compatibility_status": "VERIFIED", "test_status": "PASS"},
+    {"skill_version_id": "demo:privacy-guard@1.0.0", "content_sha256": "2222222222222222222222222222222222222222222222222222222222222222", "rights_status": "CLEARED", "compatibility_status": "VERIFIED", "test_status": "PASS"},
+    {"skill_version_id": "demo:archive-audit@1.0.0", "content_sha256": "3333333333333333333333333333333333333333333333333333333333333333", "rights_status": "CLEARED", "compatibility_status": "VERIFIED", "test_status": "PASS"},
+    {"skill_version_id": "demo:calendar@1.0.0", "content_sha256": "4444444444444444444444444444444444444444444444444444444444444444", "rights_status": "CLEARED", "compatibility_status": "VERIFIED", "test_status": "PASS"},
+    {"skill_version_id": "demo:diagram@1.0.0", "content_sha256": "5555555555555555555555555555555555555555555555555555555555555555", "rights_status": "CLEARED", "compatibility_status": "VERIFIED", "test_status": "PASS"},
+    {"skill_version_id": "demo:email@1.0.0", "content_sha256": "6666666666666666666666666666666666666666666666666666666666666666", "rights_status": "CLEARED", "compatibility_status": "VERIFIED", "test_status": "PASS"},
+    {"skill_version_id": "demo:image@1.0.0", "content_sha256": "7777777777777777777777777777777777777777777777777777777777777777", "rights_status": "CLEARED", "compatibility_status": "VERIFIED", "test_status": "PASS"},
+    {"skill_version_id": "demo:maps@1.0.0", "content_sha256": "8888888888888888888888888888888888888888888888888888888888888888", "rights_status": "CLEARED", "compatibility_status": "VERIFIED", "test_status": "PASS"},
+    {"skill_version_id": "demo:music@1.0.0", "content_sha256": "9999999999999999999999999999999999999999999999999999999999999999", "rights_status": "CLEARED", "compatibility_status": "VERIFIED", "test_status": "PASS"},
+    {"skill_version_id": "demo:pdf@1.0.0", "content_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "rights_status": "CLEARED", "compatibility_status": "VERIFIED", "test_status": "PASS"},
+    {"skill_version_id": "demo:slides@1.0.0", "content_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb", "rights_status": "CLEARED", "compatibility_status": "VERIFIED", "test_status": "PASS"},
+    {"skill_version_id": "demo:spreadsheet@1.0.0", "content_sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc", "rights_status": "CLEARED", "compatibility_status": "VERIFIED", "test_status": "PASS"}
+  ],
+  "conflicts": []
+}

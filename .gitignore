@@ -1,0 +1,11 @@
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+.env
+.env.*
+*.log
+*credentials*.json
+*token*.json
+*.pem
+*.key

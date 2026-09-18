@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "task_id": "demo:pmo-baseline",
+  "revision": "r1",
+  "baseline_status": "APPROVED",
+  "requirements": [
+    {
+      "requirement_id": "PMO-BASELINE",
+      "statement": "승인된 기준선을 식별한다",
+      "acceptance": "기준선 locator가 존재한다",
+      "source_locator": "pmo-brief.md#baseline",
+      "current_evidence_ids": [
+        "E-PMO-BASELINE"
+      ]
+    },
+    {
+      "requirement_id": "PMO-SOURCE",
+      "statement": "의사결정 근거를 출처에 연결한다",
+      "acceptance": "근거별 locator가 있다",
+      "source_locator": "pmo-brief.md#sources",
+      "current_evidence_ids": []
+    },
+    {
+      "requirement_id": "PMO-APPROVAL",
+      "statement": "기준선 변경 승인을 기록한다",
+      "acceptance": "현재형 승인 영수증이 있다",
+      "source_locator": "pmo-brief.md#approval",
+      "current_evidence_ids": []
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "E-PMO-BASELINE",
+      "locator": "baseline-v1.md#identity",
+      "evidence_kind": "TARGET",
+      "verification_status": "VERIFIED"
+    }
+  ],
+  "candidate_mappings": [
+    {
+      "requirement_id": "PMO-SOURCE",
+      "skill_version_id": "demo:source-check@1.0.0",
+      "proof_status": "TESTED",
+      "locator": "tests/source-check.json#PMO-SOURCE"
+    }
+  ]
+}

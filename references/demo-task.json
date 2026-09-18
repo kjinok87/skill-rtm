@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "task_id": "demo:contest-brief",
+  "revision": "r1",
+  "baseline_status": "APPROVED",
+  "requirements": [
+    {
+      "requirement_id": "REQ-KEEP",
+      "statement": "제목을 포함한다",
+      "acceptance": "제목 locator가 존재한다",
+      "source_locator": "brief.md#req-keep",
+      "current_evidence_ids": [
+        "E-KEEP"
+      ]
+    },
+    {
+      "requirement_id": "REQ-SOURCE",
+      "statement": "사실 주장에 출처를 연결한다",
+      "acceptance": "각 주장에 확인 가능한 locator가 있다",
+      "source_locator": "brief.md#req-source",
+      "current_evidence_ids": []
+    },
+    {
+      "requirement_id": "REQ-PRIVACY",
+      "statement": "공개문에서 개인정보를 제거한다",
+      "acceptance": "실명·고객·내부 locator가 없다",
+      "source_locator": "brief.md#req-privacy",
+      "current_evidence_ids": []
+    },
+    {
+      "requirement_id": "REQ-ARCHIVE",
+      "statement": "공개 ZIP 누출을 검사한다",
+      "acceptance": "allowlist와 누출 검색이 PASS다",
+      "source_locator": "brief.md#req-archive",
+      "current_evidence_ids": []
+    },
+    {
+      "requirement_id": "REQ-PUBLISH",
+      "statement": "외부 게시 전 승인을 받는다",
+      "acceptance": "현재형 승인 영수증이 있다",
+      "source_locator": "brief.md#req-publish",
+      "current_evidence_ids": []
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "E-KEEP",
+      "locator": "draft.md#title",
+      "evidence_kind": "TARGET",
+      "verification_status": "VERIFIED"
+    }
+  ],
+  "candidate_mappings": [
+    {
+      "requirement_id": "REQ-SOURCE",
+      "skill_version_id": "demo:source-check@1.0.0",
+      "proof_status": "TESTED",
+      "locator": "tests/source-check.json#REQ-SOURCE"
+    },
+    {
+      "requirement_id": "REQ-PRIVACY",
+      "skill_version_id": "demo:privacy-guard@1.0.0",
+      "proof_status": "TESTED",
+      "locator": "tests/privacy-guard.json#REQ-PRIVACY"
+    },
+    {
+      "requirement_id": "REQ-ARCHIVE",
+      "skill_version_id": "demo:archive-audit@1.0.0",
+      "proof_status": "DECLARED",
+      "locator": "demo-combo-review/SKILL.md#archive"
+    }
+  ]
+}

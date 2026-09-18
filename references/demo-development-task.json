@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "task_id": "demo:development-release",
+  "revision": "r1",
+  "baseline_status": "APPROVED",
+  "requirements": [
+    {
+      "requirement_id": "DEV-TEST",
+      "statement": "핵심 테스트가 통과한다",
+      "acceptance": "테스트 결과 locator가 있다",
+      "source_locator": "release-brief.md#tests",
+      "current_evidence_ids": [
+        "E-DEV-TEST"
+      ]
+    },
+    {
+      "requirement_id": "DEV-ARCHIVE",
+      "statement": "배포 archive 누출을 검사한다",
+      "acceptance": "allowlist와 누출 검사가 통과한다",
+      "source_locator": "release-brief.md#archive",
+      "current_evidence_ids": []
+    },
+    {
+      "requirement_id": "DEV-DEPLOY",
+      "statement": "운영 배포 승인을 받는다",
+      "acceptance": "대상과 범위가 포함된 승인 영수증이 있다",
+      "source_locator": "release-brief.md#deploy",
+      "current_evidence_ids": []
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "E-DEV-TEST",
+      "locator": "validation/tests.txt#pass",
+      "evidence_kind": "TARGET",
+      "verification_status": "VERIFIED"
+    }
+  ],
+  "candidate_mappings": [
+    {
+      "requirement_id": "DEV-ARCHIVE",
+      "skill_version_id": "demo:archive-audit@1.0.0",
+      "proof_status": "TESTED",
+      "locator": "tests/archive-audit.json#DEV-ARCHIVE"
+    }
+  ]
+}
