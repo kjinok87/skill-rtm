@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: LicenseRef-Skill-RTM-NonCommercial-1.0
+# Copyright (c) 2026 Kuni
 import argparse
 import hashlib
 import html
@@ -9,6 +11,7 @@ import unicodedata
 from pathlib import Path
 
 STATUSES = ("KEEP", "ASSIGN", "TRIAL", "CONFLICT", "ORPHAN")
+LICENSE_ID = "LicenseRef-Skill-RTM-NonCommercial-1.0"
 EXACT_SKILL_ID = re.compile(r"[A-Za-z0-9][A-Za-z0-9._:/-]*@(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)(?:-[0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*)?(?:\+[0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*)?\Z")
 
 
@@ -25,18 +28,38 @@ def canonical_digest(value):
     return hashlib.sha256(canonical.encode("utf-8")).hexdigest()
 
 
+def usage_policy_errors(task):
+    policy = task.get("usage_policy") if isinstance(task, dict) else None
+    if not isinstance(policy, dict):
+        return ["task.usage_policy is required; noncommercial use only"]
+    errors = []
+    if set(policy) != {"license_id", "accepted", "use", "distribution"}:
+        errors.append("usage_policy must contain exactly license_id, accepted, use, distribution")
+    if policy.get("license_id") != LICENSE_ID:
+        errors.append(f"usage_policy.license_id must be {LICENSE_ID}")
+    if policy.get("accepted") is not True:
+        errors.append("usage_policy.accepted must be true")
+    if policy.get("use") != "NONCOMMERCIAL":
+        errors.append("commercial or unknown use is prohibited; usage_policy.use must be NONCOMMERCIAL")
+    if policy.get("distribution") not in ("NONE", "NONCOMMERCIAL"):
+        errors.append("commercial or unknown distribution is prohibited; use NONE or NONCOMMERCIAL")
+    # ponytail: declarations can be falsified and local code modified; stronger enforcement needs controlled execution.
+    return errors
+
+
 def validate(task, catalog):
     errors = []
     if not isinstance(task, dict):
         return ["task root must be an object"]
     if not isinstance(catalog, dict):
         return ["catalog root must be an object"]
-    if type(task.get("schema_version")) is not int or task.get("schema_version") != 1:
-        errors.append("task.schema_version must be integer 1")
+    if type(task.get("schema_version")) is not int or task.get("schema_version") != 2:
+        errors.append("task.schema_version must be integer 2")
     if type(catalog.get("schema_version")) is not int or catalog.get("schema_version") != 1:
         errors.append("catalog.schema_version must be integer 1")
     if task.get("baseline_status") != "APPROVED":
         errors.append("task.baseline_status must be APPROVED")
+    errors.extend(usage_policy_errors(task))
     for field in ("task_id", "revision"):
         if not nonempty(task.get(field)):
             errors.append(f"task.{field} must be a non-empty string")
@@ -191,6 +214,8 @@ def render_markdown(task, catalog, payload):
         f"- Task: `{markdown_escape(payload['task_id'])}` / `{markdown_escape(payload['revision'])}`",
         f"- 선택된 Skill: {len(payload['selected_skill_versions'])} / catalog {len(catalog['skills'])}",
         f"- 외부 행동: {payload['external_actions_performed']}",
+        "- 이용 제한: 비상업적 사용·배포만 허용. 상업용 사용·판매·유료 서비스 탑재 금지.",
+        f"- 라이선스: {LICENSE_ID}",
         "",
         "## 결론",
         "",
@@ -259,6 +284,9 @@ def choose_skills(task, catalog, skills, mappings):
 
 
 def plan(task, catalog):
+    errors = usage_policy_errors(task)
+    if errors:
+        raise ValueError("; ".join(errors))
     skills = {item["skill_version_id"]: item for item in catalog["skills"]}
     evidence = {item["evidence_id"]: item for item in task["evidence"]}
     mappings = {}
@@ -334,6 +362,7 @@ def plan(task, catalog):
     return {
         "status": "PASS",
         "decision_rule_version": "1.1.0",
+        "usage_policy": dict(task["usage_policy"]),
         "task_id": task["task_id"],
         "revision": task["revision"],
         "task_sha256": canonical_digest(task),

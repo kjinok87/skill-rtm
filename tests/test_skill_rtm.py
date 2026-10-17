@@ -1,4 +1,7 @@
+# SPDX-License-Identifier: LicenseRef-Skill-RTM-NonCommercial-1.0
+# Copyright (c) 2026 Kuni
 import hashlib
+import importlib.util
 import json
 import os
 import subprocess
@@ -7,6 +10,7 @@ import tempfile
 import unittest
 from copy import deepcopy
 from pathlib import Path
+from unittest.mock import patch
 
 ROOT = Path(__file__).resolve().parents[1]
 SCRIPT = ROOT / "scripts" / "skill_rtm.py"
@@ -67,6 +71,7 @@ class SkillRtmTests(unittest.TestCase):
         self.assertEqual("TRIAL", rows["REQ-ARCHIVE"]["status"])
         self.assertEqual("ORPHAN", rows["REQ-PUBLISH"]["status"])
         self.assertEqual(0, payload["external_actions_performed"])
+        self.assertEqual(seed(TASK)["usage_policy"], payload["usage_policy"])
         self.assertEqual("", result.stderr)
 
     def test_untrusted_input_fails_closed_without_traceback(self):
@@ -77,7 +82,7 @@ class SkillRtmTests(unittest.TestCase):
 
         boolean_schema = deepcopy(base_task)
         boolean_schema["schema_version"] = True
-        probes.append((boolean_schema, base_catalog, "task.schema_version must be integer 1"))
+        probes.append((boolean_schema, base_catalog, "task.schema_version must be integer 2"))
 
         dangling = deepcopy(base_task)
         dangling["candidate_mappings"][0]["skill_version_id"] = "demo:missing@1.0.0"
@@ -133,6 +138,80 @@ class SkillRtmTests(unittest.TestCase):
                 self.assertEqual("FAIL", payload["status"])
                 self.assertIn(expected, payload["errors"])
                 self.assertEqual("", result.stderr)
+
+    def test_commercial_unknown_or_unaccepted_use_never_produces_a_plan(self):
+        catalog = seed(CATALOG)
+        base = seed(TASK)
+        probes = []
+        missing = deepcopy(base)
+        missing.pop("usage_policy")
+        probes.append(missing)
+        for value in (None, [], True, "NONCOMMERCIAL"):
+            malformed = deepcopy(base)
+            malformed["usage_policy"] = value
+            probes.append(malformed)
+        for field, values in (
+            ("license_id", ("MIT", "", None)),
+            ("accepted", (False, 1, "true", None)),
+            ("use", ("COMMERCIAL", "UNKNOWN", None, [])),
+            ("distribution", ("COMMERCIAL", "UNKNOWN", None, {})),
+        ):
+            for value in values:
+                denied = deepcopy(base)
+                denied["usage_policy"][field] = value
+                probes.append(denied)
+            omitted = deepcopy(base)
+            omitted["usage_policy"].pop(field)
+            probes.append(omitted)
+        contradictory = deepcopy(base)
+        contradictory["usage_policy"]["commercial_use"] = True
+        probes.append(contradictory)
+        old_schema = deepcopy(base)
+        old_schema["schema_version"] = 1
+        probes.append(old_schema)
+
+        for task in probes:
+            for output_format in ("json", "markdown"):
+                with self.subTest(policy=task.get("usage_policy"), output=output_format):
+                    result = run_data(task, catalog, "--format", output_format)
+                    self.assertEqual(1, result.returncode)
+                    payload = json.loads(result.stdout)
+                    self.assertEqual("FAIL", payload["status"])
+                    self.assertTrue(payload["errors"])
+                    self.assertNotIn("selected_skill_versions", payload)
+                    self.assertNotIn("rows", payload)
+                    self.assertEqual("", result.stderr)
+
+    def test_policy_applies_to_direct_planning_and_cannot_be_overridden_by_catalog(self):
+        spec = importlib.util.spec_from_file_location("skill_rtm_policy_test", SCRIPT)
+        engine = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(engine)
+        for task_path in (TASK, ALL_KEEP_TASK):
+            task = seed(task_path)
+            task["usage_policy"]["use"] = "COMMERCIAL"
+            catalog = seed(CATALOG)
+            catalog["usage_policy"] = seed(TASK)["usage_policy"]
+            with self.subTest(task=task_path.name):
+                result = run_data(task, catalog)
+                self.assertEqual(1, result.returncode)
+                self.assertEqual("FAIL", json.loads(result.stdout)["status"])
+                with patch.object(engine, "choose_skills") as solver:
+                    with self.assertRaisesRegex(ValueError, "commercial or unknown use is prohibited"):
+                        engine.plan(task, catalog)
+                    solver.assert_not_called()
+
+    def test_noncommercial_sharing_is_allowed_and_policy_is_visible_in_both_outputs(self):
+        task = seed(TASK)
+        task["usage_policy"]["distribution"] = "NONCOMMERCIAL"
+        result = run_data(task, seed(CATALOG))
+        self.assertEqual(0, result.returncode, result.stderr)
+        payload = json.loads(result.stdout)
+        self.assertEqual(task["usage_policy"], payload["usage_policy"])
+        self.assertEqual(2, payload["counts"]["ASSIGN"])
+        markdown = run_data(task, seed(CATALOG), "--format", "markdown")
+        self.assertEqual(0, markdown.returncode, markdown.stderr)
+        self.assertIn("비상업적 사용·배포만 허용", markdown.stdout)
+        self.assertIn(task["usage_policy"]["license_id"], markdown.stdout)
 
     def test_selects_minimum_set_and_exposes_unresolved_conflict(self):
         task = seed(TASK)

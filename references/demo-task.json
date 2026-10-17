@@ -1,7 +1,7 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "task_id": "demo:contest-brief",
-  "revision": "r1",
+  "revision": "r2-noncommercial",
   "baseline_status": "APPROVED",
   "requirements": [
     {
@@ -69,5 +69,11 @@
       "proof_status": "DECLARED",
       "locator": "demo-combo-review/SKILL.md#archive"
     }
-  ]
+  ],
+  "usage_policy": {
+    "license_id": "LicenseRef-Skill-RTM-NonCommercial-1.0",
+    "accepted": true,
+    "use": "NONCOMMERCIAL",
+    "distribution": "NONE"
+  }
 }

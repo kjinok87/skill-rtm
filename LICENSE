@@ -1,21 +1,58 @@
-MIT License
+Skill RTM Noncommercial License 1.0
+Identifier: LicenseRef-Skill-RTM-NonCommercial-1.0
+Copyright (c) 2026 Kuni. All rights reserved except as expressly granted below.
+Applies to: Skill RTM 0.2.0 and subsequent versions that identify this license.
+Effective date: 2026-10-17 (Asia/Seoul).
 
-Copyright (c) 2026 Kuni
+이 문서는 이 프로젝트의 자체 비상업용 라이선스입니다. MIT, Creative Commons,
+PolyForm 또는 OSI 승인 오픈소스 라이선스가 아닙니다. 아래 한국어 조항이 본문입니다.
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+1. 적용 대상
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+"본 자료"는 이 라이선스를 표시하는 프로그램, 스킬 지시문, 문서, 예시, 테스트와
+그 수정·파생 자료를 뜻합니다. 제3자 스킬과 자료의 권리를 대신 허락하지 않습니다.
+사용자가 제공한 별도 저작물이나 본 자료를 복제하지 않은 단순 분석 결과를 자동으로
+재라이선스하지 않습니다. 다만 본 자료를 상업적으로 실행·활용하는 행위는 결과물의
+소유권과 별개로 금지됩니다.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+2. 비상업적 이용 허락
+
+이 조건을 준수하는 수신자에게 개인 학습, 취미, 비영리 연구, 비상업적 시험을 위한
+열람·복제·실행·수정과 무상 비상업적 공유를 허락합니다. 비상업적 이용은 금전적 대가,
+영업상 이익, 판매 촉진 또는 예상되는 상업적 적용을 주된 목적으로 하지 않는 이용을
+뜻합니다. 기관의 명칭이나 비영리 지위만으로 상업적 이용이 허용되는 것은 아닙니다.
+
+3. 상업적 사용·배포 금지
+
+다음 행위를 허락하지 않습니다. 원본·수정본·파생본 모두에 적용됩니다.
+- 본 자료 또는 이를 포함한 상품·패키지·스킬·템플릿의 판매, 대여 또는 유료 배포.
+- 유료 제품, SaaS, API, 구독 서비스나 고객 대상 상업 서비스에 본 자료를 탑재·사용.
+- 유상 컨설팅, 대행, 고객 납품, 유료 교육·강의·워크숍의 제공 수단이나 배포물로 이용.
+- 광고·판촉·고객 유치 등 직접·간접 수익을 목적으로 이용·배포.
+- 상업적 이용을 허용하는 것처럼 재라이선스하거나 저작권·이용 제한 고지를 삭제.
+- 위 상업적 목적을 위해 실행 제한을 제거·우회하거나 그 우회 방법·도구를 배포.
+
+이 라이선스는 상업용 허가를 부여하지 않습니다. 일반 작업 승인, 다운로드, 실행
+정책의 accepted 값이나 비상업용이라고 입력한 사실은 상업용 허가가 아닙니다.
+
+4. 비상업적 공유 조건
+
+허용된 공유·수정본에도 이 LICENSE 전문, 저작권 표시, 상업적 사용·배포 금지 고지를
+포함해야 합니다. 수정한 경우 수정 사실을 표시해야 합니다. 수신자가 이 조항과
+상충하는 상업적 권한을 얻는다고 표시할 수 없습니다. 소스 공개 플랫폼이 약관상
+허용하는 열람·포크 등 플랫폼 고유 권한을 부정하지 않습니다.
+
+5. 이전 공개본과 법률상 권리
+
+이 라이선스는 새 버전의 배포 조건입니다. 이전 MIT 공개 버전과 이미 부여된 권리를
+소급 취소·제한한다고 주장하지 않습니다. 과거 커밋과 이미 전달된 사본에는 당시
+조건이 적용될 수 있습니다. 저작권법상 인용·공정 이용 등 별도 허락 없이 인정되는
+권리를 제한하지 않습니다.
+
+6. 위반 및 보증 부인
+
+이 조건을 위반한 이용에는 허락을 부여하지 않으며, 이 라이선스에 따른 이용 허락은
+위반 시 종료됩니다. 법률상 허용되는 범위에서 본 자료는 현 상태로 제공되며, 특정
+목적 적합성·정확성·비침해 등에 관한 보증을 제공하지 않습니다. 권리자는 법률상
+제한할 수 없는 책임을 제외하고 이용으로 발생하는 손해에 대해 책임을 부담하지
+않습니다.

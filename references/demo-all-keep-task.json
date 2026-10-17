@@ -1,7 +1,7 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "task_id": "demo:all-keep",
-  "revision": "r1",
+  "revision": "r2-noncommercial",
   "baseline_status": "APPROVED",
   "requirements": [
     {
@@ -9,7 +9,9 @@
       "statement": "현재 산출물의 제목이 확인된다",
       "acceptance": "실대상에서 검증된 제목 locator가 있다",
       "source_locator": "brief.md#already-covered",
-      "current_evidence_ids": ["E-ALREADY-COVERED"]
+      "current_evidence_ids": [
+        "E-ALREADY-COVERED"
+      ]
     }
   ],
   "evidence": [
@@ -27,5 +29,11 @@
       "proof_status": "TESTED",
       "locator": "tests/source-check.json#REQ-ALREADY-COVERED"
     }
-  ]
+  ],
+  "usage_policy": {
+    "license_id": "LicenseRef-Skill-RTM-NonCommercial-1.0",
+    "accepted": true,
+    "use": "NONCOMMERCIAL",
+    "distribution": "NONE"
+  }
 }

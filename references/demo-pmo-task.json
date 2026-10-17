@@ -1,7 +1,7 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "task_id": "demo:pmo-baseline",
-  "revision": "r1",
+  "revision": "r2-noncommercial",
   "baseline_status": "APPROVED",
   "requirements": [
     {
@@ -43,5 +43,11 @@
       "proof_status": "TESTED",
       "locator": "tests/source-check.json#PMO-SOURCE"
     }
-  ]
+  ],
+  "usage_policy": {
+    "license_id": "LicenseRef-Skill-RTM-NonCommercial-1.0",
+    "accepted": true,
+    "use": "NONCOMMERCIAL",
+    "distribution": "NONE"
+  }
 }
