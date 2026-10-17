@@ -4,6 +4,19 @@
 
 업무 brief를 Capability RTM으로 펼쳐 현재 Evidence가 없는 행에만 권리·정확 버전·호환성·시험 근거를 통과한 최소 Skill 집합을 배정하는 읽기 전용 Hermes/OpenClaw 호환 Candidate입니다.
 
+## 이관·공유
+
+- [이관용 스킬 문서](HANDOFF.md): 사용법, 요청 예시, 판정 규칙, 검증 범위와 라이선스를 한 파일로 정리했습니다. MD만 전달할 때 사용합니다.
+- [스킬 원문](SKILL.md): 에이전트가 따르는 기존 지시문입니다.
+- 자동 계산에는 이 저장소 전체가 필요합니다. `Code → Download ZIP`으로 받거나 아래 명령으로 복제하세요.
+
+```bash
+git clone https://github.com/kjinok87/skill-rtm.git
+cd skill-rtm
+```
+
+Python 3.8 이상과 표준 라이브러리만 사용합니다. Windows PowerShell 실행법은 [이관 문서](HANDOFF.md#자동-계산-실행법)에 있습니다. 예시 JSON은 합성 데이터이며 실제 업무의 검증 증거로 사용할 수 없습니다. 저장소가 비공개이면 받는 분에게 GitHub 읽기 권한이 있어야 링크와 ZIP에 접근할 수 있습니다.
+
 ## 1분 실행
 
 Python 3.8+와 표준 라이브러리만 사용합니다.
@@ -80,4 +93,4 @@ python3 scripts/skill_rtm.py plan \
 
 ## 라이선스
 
-MIT. 실제 외부 공유·출품은 제작자의 최종 승인 후 수행합니다.
+MIT 라이선스입니다. 사용·수정·재배포는 [LICENSE](LICENSE)의 조건을 따릅니다.
